@@ -10,3 +10,7 @@
 - [x] Étendre les notes et personnaliser la forme du flacon, l’étiquette et son écriture.
 - [x] Proposer et tester des prix indicatifs selon les fragrances.
 - [x] Vérifier l’atelier et la collection sur ordinateur et téléphone.
+- [x] Séparer le nom et le texte de l’étiquette dans l’aperçu et la commande.
+- [x] Colorer le parfum selon ses notes et personnaliser le bouchon et l’étiquette.
+- [x] Guider la création avec Ambre et proposer de créer ou trouver un parfum.
+- [x] Vérifier les choix, la commande et la conversation sur ordinateur et téléphone.

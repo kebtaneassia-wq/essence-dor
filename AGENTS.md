@@ -35,3 +35,5 @@ use the editor.
 - New catalog entries use note-specific indicative prices from the centralized pricing helper; label proposed prices clearly and preserve existing amounts.
 - Store individual perfume photo mapping in the presentation layer only; each catalog item must map to a distinct photograph.
 - Keep atelier note groups and order-message composition in a browser-safe helper; include every selected bottle and label option in WhatsApp order text without changing existing size prices.
+- Derive illustrative liquid tints from the atelier note helper and keep name, dedication, cap and label settings independent, so previews and orders reflect separate choices.
+- Derive adviser creation instructions from the same atelier options and carry creation intent in validated search parameters, so advice matches selectable notes without importing presentation assets.

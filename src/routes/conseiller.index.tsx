@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { createThread, loadThreads } from "@/lib/threads";
 
 export const Route = createFileRoute("/conseiller/")({
+  validateSearch: (search: Record<string, unknown>): { mode?: "creation" | undefined } => ({ mode: search["mode"] === "creation" ? "creation" : undefined }),
   head: () => ({ meta: [
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -16,9 +17,10 @@ export const Route = createFileRoute("/conseiller/")({
 
 function Redirect() {
   const navigate = useNavigate();
+  const { mode } = Route.useSearch();
   useEffect(() => {
-    const t = loadThreads()[0] ?? createThread();
-    void navigate({ to: "/conseiller/$threadId", params: { threadId: t.id }, replace: true });
-  }, [navigate]);
+    const t = (mode === "creation" ? createThread() : loadThreads()[0] ?? createThread());
+    void navigate({ to: "/conseiller/$threadId", params: { threadId: t.id }, search: { mode }, replace: true });
+  }, [navigate, mode]);
   return null;
 }

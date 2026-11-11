@@ -128,6 +128,23 @@ html.light {
   --label-rose: oklch(0.85 0.04 10);
   --label-sage: oklch(0.8 0.035 145);
   --label-dark: oklch(0.23 0.008 75);
+  --label-lavender: oklch(0.84 0.055 300);
+  --label-blue: oklch(0.83 0.045 235);
+  --cap-gold: oklch(0.73 0.105 85);
+  --cap-silver: oklch(0.8 0.006 240);
+  --cap-black: oklch(0.26 0.006 75);
+  --cap-rose: oklch(0.74 0.085 15);
+  --cap-sage: oklch(0.66 0.06 150);
+  --cap-highlight: oklch(0.98 0.005 90 / 72%);
+  --cap-shadow: oklch(0.12 0.005 75 / 65%);
+  --liquid-neutral: oklch(0.92 0.015 90);
+  --liquid-floral: oklch(0.75 0.13 340);
+  --liquid-fruit: oklch(0.72 0.15 25);
+  --liquid-citrus: oklch(0.89 0.16 100);
+  --liquid-marine: oklch(0.75 0.11 235);
+  --liquid-green: oklch(0.76 0.1 150);
+  --liquid-powder: oklch(0.81 0.075 300);
+  --liquid-amber: oklch(0.69 0.12 60);
   --ink-charcoal: oklch(0.23 0.008 75);
   --ink-gold: oklch(0.72 0.1 83);
   --ink-light: oklch(0.97 0.005 100);
@@ -137,17 +154,44 @@ html.light {
   --color-label-rose: var(--label-rose);
   --color-label-sage: var(--label-sage);
   --color-label-dark: var(--label-dark);
+  --color-label-lavender: var(--label-lavender);
+  --color-label-blue: var(--label-blue);
   --color-ink-charcoal: var(--ink-charcoal);
   --color-ink-gold: var(--ink-gold);
   --color-ink-light: var(--ink-light);
 }
-.bottle-label { position: absolute; left: 38%; top: 43%; width: 24%; height: 14%; display: flex; align-items: center; justify-content: center; padding: 3px; text-align: center; overflow-wrap: anywhere; line-height: 1.15; font-size: 11px; }
+.bottle-label { position: absolute; left: 38%; top: 43%; width: 24%; height: 14%; display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center; padding: 3px; text-align: center; overflow-wrap: anywhere; line-height: 1.15; font-size: 10px; }
 .bottle-label[data-forme="rond"] { left: 37%; top: 48%; width: 26%; height: 15%; }
 .bottle-label[data-forme="ovale"] { left: 39%; top: 44%; width: 22%; height: 13%; }
 .bottle-label[data-forme="facettes"] { left: 38%; top: 45%; width: 24%; height: 14%; }
 .label-classique { font-family: var(--font-display); font-weight: 600; }
 .label-moderne { font-family: var(--font-sans); }
 .label-manuscrite { font-family: "Segoe Script", "Brush Script MT", cursive; font-style: italic; }
+.bottle-name { font-weight: 600; max-width: 100%; }
+.bottle-dedication { font-size: 8px; max-width: 100%; font-weight: 400; }
+.bottle-liquid { position: absolute; inset: 32% 32% 24%; display: flex; flex-direction: column; mix-blend-mode: multiply; opacity: 0.72; border-radius: 8% 8% 15% 15%; overflow: hidden; pointer-events: none; }
+.bottle-liquid > div { position: absolute; inset: 0; opacity: 0.45; mix-blend-mode: multiply; }
+.bottle-preview[data-forme="rond"] .bottle-liquid { inset: 35% 23% 23%; border-radius: 30% 30% 48% 48%; }
+.bottle-preview[data-forme="ovale"] .bottle-liquid { inset: 27% 33% 21%; border-radius: 45%; }
+.bottle-preview[data-forme="facettes"] .bottle-liquid { inset: 33% 29% 23%; clip-path: polygon(15% 0, 85% 0, 100% 16%, 100% 90%, 85% 100%, 15% 100%, 0 90%, 0 16%); }
+.liquid-neutre { background: var(--liquid-neutral); }
+.liquid-floral { background: var(--liquid-floral); }
+.liquid-fruite { background: var(--liquid-fruit); }
+.liquid-agrume { background: var(--liquid-citrus); }
+.liquid-marin { background: var(--liquid-marine); }
+.liquid-vert { background: var(--liquid-green); }
+.liquid-poudre { background: var(--liquid-powder); }
+.liquid-ambre { background: var(--liquid-amber); }
+.cap-or { --cap-color: var(--cap-gold); }
+.cap-argent { --cap-color: var(--cap-silver); }
+.cap-noir { --cap-color: var(--cap-black); }
+.cap-rose { --cap-color: var(--cap-rose); }
+.cap-sauge { --cap-color: var(--cap-sage); }
+.cap-swatch { background: var(--cap-color); }
+.bottle-cap { position: absolute; left: 43%; top: 11.2%; width: 14%; height: 13.5%; border-radius: 8% 8% 3% 3%; background: linear-gradient(90deg, var(--cap-shadow), var(--cap-color) 12%, var(--cap-highlight) 30%, var(--cap-color) 48%, var(--cap-shadow) 69%, var(--cap-color) 92%); pointer-events: none; }
+.bottle-preview[data-forme="rond"] .bottle-cap { top: 13.4%; height: 13.4%; }
+.bottle-preview[data-forme="ovale"] .bottle-cap { top: 6.8%; height: 13.1%; }
+.bottle-preview[data-forme="facettes"] .bottle-cap { top: 10.6%; height: 14%; }
 
 @layer base {
   * {
