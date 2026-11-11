@@ -11,6 +11,8 @@ import { createThread, deleteThread, loadThreads, updateThread, type Thread } fr
 
 import { Button } from "@/components/ui/button";
 import { choixConseiller } from "@/lib/conseiller";
+import { parfumsDansMessage } from "@/lib/chat-parfums";
+import { ParfumCard } from "@/components/ParfumCard";
 
 export const Route = createFileRoute("/conseiller/$threadId")({
   validateSearch: (search: Record<string, unknown>): { mode?: "creation" | undefined } => ({ mode: search["mode"] === "creation" ? "creation" : undefined }),
@@ -79,13 +81,16 @@ function ChatWindow({ threadId, initial, onSaved, mode }: { threadId: string; in
             <ConversationEmptyState title="Bonjour, je suis Ambre ✦" description={mode === "creation" ? "Quel parfum aimeriez-vous créer ? Décrivez vos envies, une sensation ou un souvenir." : "Souhaitez-vous créer votre parfum ou que je vous aide à en trouver un ?"} />
           )}
           {messages.length === 0 && <div className="flex flex-wrap justify-center gap-3">{choixConseiller.filter((c) => mode !== "creation" || c.id === "creation").map((c) => <Button key={c.id} variant="outline" disabled={busy} onClick={() => { setError(null); void sendMessage({ text: c.message }); }}>{c.id === "creation" ? <Sparkles className="size-4" /> : <Search className="size-4" />}{c.label}</Button>)}</div>}
-          {messages.map((m) => (
+          {messages.map((m) => {
+            const recommandations = m.role === "assistant" ? parfumsDansMessage(m.parts.filter((p) => p.type === "text").map((p) => p.text).join("\n")) : [];
+            return (
             <Message key={m.id} from={m.role}>
               <MessageContent className="group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground">
                 {m.parts.map((p, i) => p.type === "text" ? <MessageResponse key={i}>{p.text}</MessageResponse> : null)}
               </MessageContent>
+              {recommandations.length > 0 && <div className="grid w-full min-w-0 grid-cols-1 gap-3 sm:grid-cols-2" aria-label="Parfums proposés par Ambre">{recommandations.map((p) => <ParfumCard key={p.id} p={p} compact />)}</div>}
             </Message>
-          ))}
+          ); })}
           {status === "submitted" && <Shimmer>Ambre réfléchit…</Shimmer>}
           {error && <p className="text-sm text-destructive">{error}</p>}
         </ConversationContent>

@@ -14,3 +14,5 @@
 - [x] Colorer le parfum selon ses notes et personnaliser le bouchon et l’étiquette.
 - [x] Guider la création avec Ambre et proposer de créer ou trouver un parfum.
 - [x] Vérifier les choix, la commande et la conversation sur ordinateur et téléphone.
+- [x] Afficher les parfums nommés par Ambre avec photo et fiche cliquable dans le chat.
+- [x] Vérifier une recommandation réelle, son ouverture et sa conservation après rechargement.

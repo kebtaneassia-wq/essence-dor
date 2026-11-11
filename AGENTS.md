@@ -37,3 +37,4 @@ use the editor.
 - Keep atelier note groups and order-message composition in a browser-safe helper; include every selected bottle and label option in WhatsApp order text without changing existing size prices.
 - Derive illustrative liquid tints from the atelier note helper and keep name, dedication, cap and label settings independent, so previews and orders reflect separate choices.
 - Derive adviser creation instructions from the same atelier options and carry creation intent in validated search parameters, so advice matches selectable notes without importing presentation assets.
+- Resolve catalog names from assistant text in a browser-safe helper and render compact shared perfume cards outside message bubbles, so both live and saved recommendations open the same detail dialog.
