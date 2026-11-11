@@ -32,4 +32,6 @@ use the editor.
 - Keep perfume imagery and editorial profiles in a browser-safe presentation catalog separate from the core perfume catalog, so UI details do not enter the adviser server's imports.
 - Use the shared perfume card and accessible dialog for enlarged perfume details, so home, collection and quiz results show the same information.
 - Keep detailed scent categories separate from the four quiz families; centralize note classification and collection filtering in browser-safe catalog helpers so existing quiz scoring remains compatible.
-- New catalog entries without supplied prices use a null price rather than an invented amount; the price formatter handles both existing amounts and unconfirmed prices.
+- New catalog entries use note-specific indicative prices from the centralized pricing helper; label proposed prices clearly and preserve existing amounts.
+- Store individual perfume photo mapping in the presentation layer only; each catalog item must map to a distinct photograph.
+- Keep atelier note groups and order-message composition in a browser-safe helper; include every selected bottle and label option in WhatsApp order text without changing existing size prices.

@@ -5,3 +5,8 @@
 - [x] Classer et filtrer les parfums Femme, Homme et Unisexe.
 - [x] Conserver les photos et fiches de personnalité pour les nouveaux parfums.
 - [x] Tester la recherche et les classements sur ordinateur et téléphone.
+- [x] Adoucir le mode clair.
+- [x] Donner une image réaliste distincte à chacun des 109 parfums.
+- [x] Étendre les notes et personnaliser la forme du flacon, l’étiquette et son écriture.
+- [x] Proposer et tester des prix indicatifs selon les fragrances.
+- [x] Vérifier l’atelier et la collection sur ordinateur et téléphone.

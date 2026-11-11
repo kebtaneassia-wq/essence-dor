@@ -1,6 +1,7 @@
 import { categorieParfum, genres, formatPrix, type Parfum } from "@/lib/parfums";
 import { categories } from "@/lib/fragrances";
 import { parfumDetails } from "@/lib/parfum-details";
+import { parfumPhotos } from "@/lib/parfum-photos";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ArrowUpRight } from "lucide-react";
@@ -8,11 +9,12 @@ import { ArrowUpRight } from "lucide-react";
 export function ParfumCard({ p }: { p: Parfum }) {
   const details = parfumDetails[p.id];
   if (!details) return null;
+  const photo = parfumPhotos[p.id] ?? details.photo;
   return (
     <Dialog>
       <article className="group relative flex flex-col overflow-hidden border border-border bg-card transition-shadow motion-safe:hover:shadow-gold">
         <div className="aspect-square overflow-hidden bg-accent">
-          <img src={details.photo} alt={`Flacon de ${p.nom}`} width={768} height={768} loading="lazy" className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105" />
+          <img src={photo} alt={`Flacon de ${p.nom}`} width={480} height={480} loading="lazy" className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105" />
         </div>
         <div className="flex flex-1 flex-col p-5">
           <p className="eyebrow">{categories[categorieParfum(p)]} · {genres[p.genre]}</p>
@@ -20,7 +22,7 @@ export function ParfumCard({ p }: { p: Parfum }) {
           <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>
           <p className="mt-3 text-xs italic text-accent-foreground">{p.notes}</p>
           <div className="mt-auto flex items-center justify-between gap-2 pt-5">
-            <p className="text-sm text-primary">{formatPrix(p.prix)}</p>
+            <div><p className="text-sm text-primary">{formatPrix(p.prix)}</p>{p.prixIndicatif && <p className="text-xs text-muted-foreground">Prix indicatif</p>}</div>
             <DialogTrigger asChild>
               <Button variant="ghost" aria-label={`Découvrir ${p.nom}`} className="text-primary after:absolute after:inset-0 after:content-['']">Découvrir <ArrowUpRight /></Button>
             </DialogTrigger>
@@ -30,7 +32,7 @@ export function ParfumCard({ p }: { p: Parfum }) {
       <DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-4xl overflow-y-auto p-0">
         <div className="grid md:grid-cols-2">
           <div className="bg-accent md:sticky md:top-0 md:self-start">
-            <img src={details.photo} alt={`Flacon de ${p.nom} en grand`} width={768} height={768} className="aspect-square w-full object-cover" />
+            <img src={photo} alt={`Flacon de ${p.nom} en grand`} width={480} height={480} className="aspect-square w-full object-cover" />
           </div>
           <div className="space-y-6 p-6 md:p-8">
             <div>
@@ -38,6 +40,7 @@ export function ParfumCard({ p }: { p: Parfum }) {
               <DialogTitle className="mt-3 font-display text-4xl font-normal tracking-normal">{p.nom}</DialogTitle>
               <DialogDescription className="mt-3 leading-relaxed">{p.description}</DialogDescription>
               <p className="mt-4 text-2xl text-primary">{formatPrix(p.prix)}</p>
+              {p.prixIndicatif && <p className="mt-1 text-xs text-muted-foreground">Prix indicatif · à valider par la boutique</p>}
             </div>
             <div className="border-t border-border pt-5">
               <h3 className="text-2xl">Son univers olfactif</h3>

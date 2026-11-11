@@ -102,24 +102,52 @@
 }
 
 html.light {
-  --background: oklch(0.97 0.012 85);
-  --foreground: oklch(0.2 0.02 60);
-  --card: oklch(0.995 0.005 85);
-  --card-foreground: oklch(0.2 0.02 60);
-  --popover: oklch(0.995 0.005 85);
-  --popover-foreground: oklch(0.2 0.02 60);
-  --primary: oklch(0.58 0.12 75);
-  --primary-foreground: oklch(0.99 0.005 85);
+  --background: oklch(0.925 0.006 150);
+  --foreground: oklch(0.32 0.012 75);
+  --card: oklch(0.949 0.005 150);
+  --card-foreground: oklch(0.32 0.012 75);
+  --popover: oklch(0.949 0.005 150);
+  --popover-foreground: oklch(0.32 0.012 75);
+  --primary: oklch(0.49 0.075 78);
+  --primary-foreground: oklch(0.96 0.006 150);
   --secondary: oklch(0.93 0.02 85);
   --secondary-foreground: oklch(0.2 0.02 60);
   --muted: oklch(0.93 0.02 85);
   --muted-foreground: oklch(0.45 0.03 70);
-  --accent: oklch(0.92 0.04 85);
+  --accent: oklch(0.88 0.014 150);
   --accent-foreground: oklch(0.45 0.1 70);
   --border: oklch(0.58 0.12 75 / 25%);
   --input: oklch(0.58 0.12 75 / 35%);
-  --gradient-gold: linear-gradient(135deg, oklch(0.7 0.13 85), oklch(0.52 0.12 65));
+  --ring: oklch(0.49 0.075 78);
+  --gradient-gold: linear-gradient(135deg, oklch(0.54 0.075 85), oklch(0.46 0.065 70));
+  --shadow-gold: 0 14px 35px -20px oklch(0.4 0.03 78 / 20%);
 }
+
+:root {
+  --label-pearl: oklch(0.94 0.006 100);
+  --label-rose: oklch(0.85 0.04 10);
+  --label-sage: oklch(0.8 0.035 145);
+  --label-dark: oklch(0.23 0.008 75);
+  --ink-charcoal: oklch(0.23 0.008 75);
+  --ink-gold: oklch(0.72 0.1 83);
+  --ink-light: oklch(0.97 0.005 100);
+}
+@theme inline {
+  --color-label-pearl: var(--label-pearl);
+  --color-label-rose: var(--label-rose);
+  --color-label-sage: var(--label-sage);
+  --color-label-dark: var(--label-dark);
+  --color-ink-charcoal: var(--ink-charcoal);
+  --color-ink-gold: var(--ink-gold);
+  --color-ink-light: var(--ink-light);
+}
+.bottle-label { position: absolute; left: 38%; top: 43%; width: 24%; height: 14%; display: flex; align-items: center; justify-content: center; padding: 3px; text-align: center; overflow-wrap: anywhere; line-height: 1.15; font-size: 11px; }
+.bottle-label[data-forme="rond"] { left: 37%; top: 48%; width: 26%; height: 15%; }
+.bottle-label[data-forme="ovale"] { left: 39%; top: 44%; width: 22%; height: 13%; }
+.bottle-label[data-forme="facettes"] { left: 38%; top: 45%; width: 24%; height: 14%; }
+.label-classique { font-family: var(--font-display); font-weight: 600; }
+.label-moderne { font-family: var(--font-sans); }
+.label-manuscrite { font-family: "Segoe Script", "Brush Script MT", cursive; font-style: italic; }
 
 @layer base {
   * {

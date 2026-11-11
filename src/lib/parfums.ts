@@ -1,9 +1,10 @@
 import { categories, fragrances, fragranceId, type Categorie } from "./fragrances";
+import { prixFragrance } from "./pricing";
 
 export type Famille = "floral" | "boise" | "oriental" | "frais";
 export type Genre = "Femme" | "Homme" | "Mixte";
 export const genres: Record<Genre, string> = { Femme: "Femme", Homme: "Homme", Mixte: "Unisexe" };
-export type Parfum = { id: string; nom: string; famille: Famille; categorie?: Categorie; genre: Genre; notes: string; prix: number | null; description: string };
+export type Parfum = { id: string; nom: string; famille: Famille; categorie?: Categorie; genre: Genre; notes: string; prix: number | null; prixIndicatif?: boolean; description: string };
 export const familles: Record<Famille, string> = { floral: "Floral", boise: "Boisé", oriental: "Oriental", frais: "Frais" };
 
 const familleParCategorie: Record<Categorie, Famille> = {
@@ -13,7 +14,7 @@ const familleParCategorie: Record<Categorie, Famille> = {
 const nouveauxParfums: Parfum[] = (Object.entries(fragrances) as [Categorie, string[]][]).flatMap(([categorie, notes]) => notes.map((note) => ({
   id: fragranceId(note), nom: `Essence ${note}`, categorie, famille: familleParCategorie[categorie],
   genre: categorie === "floral" && !["Lavande", "Géranium"].includes(note) || categorie === "fruite" && ["Framboise", "Fraise", "Cerise", "Poire", "Pêche", "Litchi"].includes(note) ? "Femme" : ["cuir", "aromatique"].includes(categorie) || ["Cèdre", "Vétiver", "Cyprès", "Bouleau", "Poivre noir", "Lavande", "Géranium"].includes(note) ? "Homme" : "Mixte",
-  notes: note, prix: null,
+  notes: note, prix: prixFragrance(note, categorie), prixIndicatif: true,
   description: `Une création autour de ${note.toLocaleLowerCase("fr-FR")}, dans l'univers des parfums ${categories[categorie].toLocaleLowerCase("fr-FR")}.`,
 })));
 
