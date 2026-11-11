@@ -21,7 +21,7 @@ const tailles = [{ ml: 30, prix: 4500 }, { ml: 50, prix: 6900 }, { ml: 100, prix
 
 function Atelier() {
   const [choix, setChoix] = useState<Record<string, string>>({});
-  const [taille, setTaille] = useState(tailles[1]);
+  const [taille, setTaille] = useState(tailles[1]!);
   const [nom, setNom] = useState("");
   const complet = etapes.every((e) => choix[e.key]);
   const msg = encodeURIComponent(`Bonjour Essence d'Or, je souhaite commander mon parfum "${nom || "Mon Essence"}" : ${etapes.map((e) => choix[e.key]).join(", ")} — ${taille.ml} ml.`);

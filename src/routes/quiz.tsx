@@ -30,7 +30,7 @@ function Quiz() {
       <div className="mt-8 flex flex-wrap gap-4">{["Femme", "Homme", "Peu importe"].map((g) => <button key={g} className="btn-outline" onClick={() => setGenre(g)}>{g}</button>)}</div></Wrap>
   );
   if (step < questions.length) {
-    const q = questions[step];
+    const q = questions[step]!;
     return (
       <Wrap>
         <p className="eyebrow">Question {step + 1} / {questions.length}</p>
@@ -43,7 +43,7 @@ function Quiz() {
     );
   }
   const scores = answers.reduce<Record<string, number>>((a, f) => ({ ...a, [f]: (a[f] ?? 0) + 1 }), {});
-  const top = (Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0]) as Famille;
+  const top = (Object.entries(scores).sort((a, b) => b[1] - a[1])[0]![0]) as Famille;
   const recos = parfums.filter((p) => p.famille === top && (genre === "Peu importe" || p.genre === genre || p.genre === "Mixte"));
   const list = recos.length ? recos : parfums.filter((p) => p.famille === top);
   return (
