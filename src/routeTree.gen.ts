@@ -13,6 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as PersonnaliserRouteImport } from './routes/personnaliser'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ConseillerIndexRouteImport } from './routes/conseiller.index'
+import { Route as ConseillerThreadIdRouteImport } from './routes/conseiller.$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +37,39 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConseillerIndexRoute = ConseillerIndexRouteImport.update({
+  id: '/conseiller/',
+  path: '/conseiller/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConseillerThreadIdRoute = ConseillerThreadIdRouteImport.update({
+  id: '/conseiller/$threadId',
+  path: '/conseiller/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/collection': typeof CollectionRoute
   '/personnaliser': typeof PersonnaliserRoute
   '/quiz': typeof QuizRoute
+  '/api/chat': typeof ApiChatRoute
+  '/conseiller/$threadId': typeof ConseillerThreadIdRoute
+  '/conseiller/': typeof ConseillerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/collection': typeof CollectionRoute
   '/personnaliser': typeof PersonnaliserRoute
   '/quiz': typeof QuizRoute
+  '/api/chat': typeof ApiChatRoute
+  '/conseiller/$threadId': typeof ConseillerThreadIdRoute
+  '/conseiller': typeof ConseillerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +77,38 @@ export interface FileRoutesById {
   '/collection': typeof CollectionRoute
   '/personnaliser': typeof PersonnaliserRoute
   '/quiz': typeof QuizRoute
+  '/api/chat': typeof ApiChatRoute
+  '/conseiller/$threadId': typeof ConseillerThreadIdRoute
+  '/conseiller/': typeof ConseillerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/collection' | '/personnaliser' | '/quiz'
+  fullPaths:
+    | '/'
+    | '/collection'
+    | '/personnaliser'
+    | '/quiz'
+    | '/api/chat'
+    | '/conseiller/$threadId'
+    | '/conseiller/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collection' | '/personnaliser' | '/quiz'
-  id: '__root__' | '/' | '/collection' | '/personnaliser' | '/quiz'
+  to:
+    | '/'
+    | '/collection'
+    | '/personnaliser'
+    | '/quiz'
+    | '/api/chat'
+    | '/conseiller/$threadId'
+    | '/conseiller'
+  id:
+    | '__root__'
+    | '/'
+    | '/collection'
+    | '/personnaliser'
+    | '/quiz'
+    | '/api/chat'
+    | '/conseiller/$threadId'
+    | '/conseiller/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +116,9 @@ export interface RootRouteChildren {
   CollectionRoute: typeof CollectionRoute
   PersonnaliserRoute: typeof PersonnaliserRoute
   QuizRoute: typeof QuizRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ConseillerThreadIdRoute: typeof ConseillerThreadIdRoute
+  ConseillerIndexRoute: typeof ConseillerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +151,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conseiller/': {
+      id: '/conseiller/'
+      path: '/conseiller'
+      fullPath: '/conseiller/'
+      preLoaderRoute: typeof ConseillerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conseiller/$threadId': {
+      id: '/conseiller/$threadId'
+      path: '/conseiller/$threadId'
+      fullPath: '/conseiller/$threadId'
+      preLoaderRoute: typeof ConseillerThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionRoute: CollectionRoute,
   PersonnaliserRoute: PersonnaliserRoute,
   QuizRoute: QuizRoute,
+  ApiChatRoute: ApiChatRoute,
+  ConseillerThreadIdRoute: ConseillerThreadIdRoute,
+  ConseillerIndexRoute: ConseillerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -101,6 +101,26 @@
   --shadow-gold: 0 20px 50px -20px oklch(0.78 0.12 82 / 45%);
 }
 
+html.light {
+  --background: oklch(0.97 0.012 85);
+  --foreground: oklch(0.2 0.02 60);
+  --card: oklch(0.995 0.005 85);
+  --card-foreground: oklch(0.2 0.02 60);
+  --popover: oklch(0.995 0.005 85);
+  --popover-foreground: oklch(0.2 0.02 60);
+  --primary: oklch(0.58 0.12 75);
+  --primary-foreground: oklch(0.99 0.005 85);
+  --secondary: oklch(0.93 0.02 85);
+  --secondary-foreground: oklch(0.2 0.02 60);
+  --muted: oklch(0.93 0.02 85);
+  --muted-foreground: oklch(0.45 0.03 70);
+  --accent: oklch(0.92 0.04 85);
+  --accent-foreground: oklch(0.45 0.1 70);
+  --border: oklch(0.58 0.12 75 / 25%);
+  --input: oklch(0.58 0.12 75 / 35%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.7 0.13 85), oklch(0.52 0.12 65));
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
