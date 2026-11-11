@@ -6,21 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ArrowUpRight } from "lucide-react";
 
-export function ParfumCard({ p, compact = false }: { p: Parfum; compact?: boolean }) {
+export function ParfumCard({ p, compact = false, shelf = false }: { p: Parfum; compact?: boolean; shelf?: boolean }) {
   const details = parfumDetails[p.id];
   if (!details) return null;
   const photo = parfumPhotos[p.id] ?? details.photo;
   return (
     <Dialog>
-      <article className="group relative flex flex-col overflow-hidden border border-border bg-card transition-shadow motion-safe:hover:shadow-gold">
-        <div className={`${compact ? "aspect-[4/3]" : "aspect-square"} overflow-hidden bg-accent`}>
+      <article className={shelf ? "shelf-perfume group relative flex min-w-0 flex-col" : "group relative flex flex-col overflow-hidden border border-border bg-card transition-shadow motion-safe:hover:shadow-gold"}>
+        <div className={shelf ? "shelf-display" : `${compact ? "aspect-[4/3]" : "aspect-square"} overflow-hidden bg-accent`}>
           <img src={photo} alt={`Flacon de ${p.nom}`} width={480} height={480} loading="lazy" className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105" />
         </div>
-        <div className={`flex flex-1 flex-col ${compact ? "p-3" : "p-5"}`}>
+        <div className={`flex flex-1 flex-col ${shelf ? "shelf-caption" : compact ? "p-3" : "p-5"}`}>
           <p className="eyebrow">{categories[categorieParfum(p)]} · {genres[p.genre]}</p>
           <h3 className={`mt-2 break-words ${compact ? "text-xl" : "text-2xl"}`}>{p.nom}</h3>
-          {!compact && <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>}
-          {!compact && <p className="mt-3 text-xs italic text-accent-foreground">{p.notes}</p>}
+          {!compact && !shelf && <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>}
+          {!compact && <p className={`${shelf ? "shelf-notes" : "mt-3"} text-xs italic text-accent-foreground`}>{p.notes}</p>}
           <div className={`mt-auto flex flex-wrap items-center justify-between gap-2 ${compact ? "pt-3" : "pt-5"}`}>
             <div><p className="text-sm text-primary">{formatPrix(p.prix)}</p>{p.prixIndicatif && <p className="text-xs text-muted-foreground">Prix indicatif</p>}</div>
             <DialogTrigger asChild>
