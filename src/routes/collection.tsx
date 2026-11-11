@@ -5,6 +5,8 @@ import { ParfumCard } from "@/components/ParfumCard";
 
 export const Route = createFileRoute("/collection")({
   head: () => ({ meta: [
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
     { title: "Collection — Essence d'Or" },
     { name: "description", content: "Parfums floraux, boisés, orientaux et frais pour femme et homme." },
     { property: "og:title", content: "Collection — Essence d'Or" },

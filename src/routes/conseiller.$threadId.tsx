@@ -11,9 +11,11 @@ import { createThread, deleteThread, loadThreads, updateThread, type Thread } fr
 
 export const Route = createFileRoute("/conseiller/$threadId")({
   head: () => ({ meta: [
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
     { title: "Conversation — Conseillère Essence d'Or" },
     { name: "description", content: "Votre conversation avec la conseillère parfum Essence d'Or." },
-    { property: "og:title", content: "Conseillère parfum — Essence d'Or" },
+    { property: "og:title", content: "Conversation — Conseillère Essence d'Or" },
     { property: "og:description", content: "Trouvez ou créez votre parfum idéal." },
   ] }),
   ssr: false,

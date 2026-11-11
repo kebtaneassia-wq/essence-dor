@@ -1,0 +1,3 @@
+- [x] Ajouter une photo pour chacun des huit parfums.
+- [x] Ouvrir une fiche agrandie au clic avec notes, détails et personnalité.
+- [x] Vérifier les fiches sur ordinateur et téléphone.

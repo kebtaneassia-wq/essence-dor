@@ -4,6 +4,8 @@ import { formatPrix } from "@/lib/parfums";
 
 export const Route = createFileRoute("/personnaliser")({
   head: () => ({ meta: [
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
     { title: "Créer mon parfum — Essence d'Or" },
     { name: "description", content: "Composez votre fragrance personnalisée : notes de tête, de cœur, de fond et flacon." },
     { property: "og:title", content: "Créer mon parfum — Essence d'Or" },

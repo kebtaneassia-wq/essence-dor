@@ -5,6 +5,8 @@ import { ParfumCard } from "@/components/ParfumCard";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({ meta: [
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
     { title: "Quiz olfactif — Essence d'Or" },
     { name: "description", content: "Répondez à 5 questions et recevez des parfums recommandés selon vos goûts." },
     { property: "og:title", content: "Quiz olfactif — Essence d'Or" },

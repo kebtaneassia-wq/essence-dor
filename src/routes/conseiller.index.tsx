@@ -4,6 +4,8 @@ import { createThread, loadThreads } from "@/lib/threads";
 
 export const Route = createFileRoute("/conseiller/")({
   head: () => ({ meta: [
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
     { title: "Conseillère parfum — Essence d'Or" },
     { name: "description", content: "Discutez avec notre conseillère intelligente pour trouver votre parfum idéal." },
     { property: "og:title", content: "Conseillère parfum — Essence d'Or" },

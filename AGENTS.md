@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep perfume imagery and editorial profiles in a browser-safe presentation catalog separate from the core perfume catalog, so UI details do not enter the adviser server's imports.
+- Use the shared perfume card and accessible dialog for enlarged perfume details, so home, collection and quiz results show the same information.
