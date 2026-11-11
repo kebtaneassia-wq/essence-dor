@@ -1,3 +1,7 @@
 - [x] Ajouter une photo pour chacun des huit parfums.
 - [x] Ouvrir une fiche agrandie au clic avec notes, détails et personnalité.
 - [x] Vérifier les fiches sur ordinateur et téléphone.
+- [x] Ajouter toutes les fragrances demandées, classées par famille olfactive.
+- [x] Classer et filtrer les parfums Femme, Homme et Unisexe.
+- [x] Conserver les photos et fiches de personnalité pour les nouveaux parfums.
+- [x] Tester la recherche et les classements sur ordinateur et téléphone.

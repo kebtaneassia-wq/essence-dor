@@ -31,3 +31,5 @@ use the editor.
 
 - Keep perfume imagery and editorial profiles in a browser-safe presentation catalog separate from the core perfume catalog, so UI details do not enter the adviser server's imports.
 - Use the shared perfume card and accessible dialog for enlarged perfume details, so home, collection and quiz results show the same information.
+- Keep detailed scent categories separate from the four quiz families; centralize note classification and collection filtering in browser-safe catalog helpers so existing quiz scoring remains compatible.
+- New catalog entries without supplied prices use a null price rather than an invented amount; the price formatter handles both existing amounts and unconfirmed prices.
