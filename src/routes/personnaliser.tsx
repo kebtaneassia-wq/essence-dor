@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { formatPrix } from "@/lib/parfums";
-import { etapes, tailles, formes, formesEtiquette, couleurs, bouchons, couleurNote, encres, polices, messageCommande } from "@/lib/atelier";
+import { etapes, tailles, formes, formesEtiquette, couleurs, bouchons, verres, couleurNote, encres, polices, messageCommande } from "@/lib/atelier";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -23,8 +23,9 @@ export const Route = createFileRoute("/personnaliser")({
   component: Atelier,
 });
 const photos = { rectangle, rond, ovale, facettes };
-const fonds = { ivoire: "bg-label-pearl", rose: "bg-label-rose", sauge: "bg-label-sage", noir: "bg-label-dark", lavande: "bg-label-lavender", bleu: "bg-label-blue", bordeaux: "bg-label-bordeaux", emeraude: "bg-label-emeraude", sable: "bg-label-sable", terracotta: "bg-label-terracotta" };
-const fondsSombres = new Set(["noir", "bordeaux", "emeraude"]);
+const fonds = { ivoire: "bg-label-pearl", rose: "bg-label-rose", sauge: "bg-label-sage", noir: "bg-label-dark", lavande: "bg-label-lavender", bleu: "bg-label-blue", bordeaux: "bg-label-bordeaux", emeraude: "bg-label-emeraude", sable: "bg-label-sable", terracotta: "bg-label-terracotta", creme: "bg-label-creme", menthe: "bg-label-menthe", prune: "bg-label-prune", marine: "bg-label-marine", corail: "bg-label-corail", taupe: "bg-label-taupe" };
+const fondsSombres = new Set(["noir", "bordeaux", "emeraude", "marine", "prune"]);
+const verreSwatches: Record<string, string> = { transparent: "bg-card", dore: "glass-dore", rose: "glass-rose", fume: "glass-fume", bleu: "glass-bleu", vert: "glass-vert", violet: "glass-violet", ambre: "glass-ambre" };
 const textes = { charbon: "text-ink-charcoal", or: "text-ink-gold", clair: "text-ink-light" };
 const swatches = { charbon: "bg-ink-charcoal", or: "bg-ink-gold", clair: "bg-ink-light" };
 
@@ -38,9 +39,10 @@ function Atelier() {
   const [encre, setEncre] = useState<keyof typeof textes>("charbon");
   const [police, setPolice] = useState("classique");
   const [bouchon, setBouchon] = useState<(typeof bouchons)[number]["id"]>("or");
+  const [verre, setVerre] = useState<(typeof verres)[number]["id"]>("transparent");
   const [texte, setTexte] = useState("");
   const complet = etapes.every((e) => choix[e.key]);
-  const msg = encodeURIComponent(messageCommande({ notes: choix, ml: taille.ml, prix: taille.prix, nom, forme: formes.find((f) => f.id === forme)?.nom ?? forme, etiquette: couleurs.find((c) => c.id === couleur)?.nom ?? couleur, etiquetteForme: formesEtiquette.find((f) => f.id === formeEtiquette)?.nom ?? formeEtiquette, encre: encres.find((c) => c.id === encre)?.nom ?? encre, police: polices.find((p) => p.id === police)?.nom ?? police, texte, bouchon: bouchons.find((b) => b.id === bouchon)?.nom ?? bouchon }));
+  const msg = encodeURIComponent(messageCommande({ notes: choix, ml: taille.ml, prix: taille.prix, nom, forme: formes.find((f) => f.id === forme)?.nom ?? forme, verre: verres.find((v) => v.id === verre)?.nom ?? verre, etiquette: couleurs.find((c) => c.id === couleur)?.nom ?? couleur, etiquetteForme: formesEtiquette.find((f) => f.id === formeEtiquette)?.nom ?? formeEtiquette, encre: encres.find((c) => c.id === encre)?.nom ?? encre, police: polices.find((p) => p.id === police)?.nom ?? police, texte, bouchon: bouchons.find((b) => b.id === bouchon)?.nom ?? bouchon }));
   return (
     <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
       <p className="eyebrow">L'atelier</p>
@@ -66,6 +68,8 @@ function Atelier() {
               <img src={photos[f.id]} alt="" width={768} height={768} loading="lazy" className="aspect-square w-full object-cover" />
               <span className="flex w-full items-center justify-center gap-1 py-3 text-xs">{f.nom}{forme === f.id && <Check className="size-3" />}</span>
             </Button>)}</div>
+            <p className="mb-3 mt-6 text-sm text-muted-foreground">Couleur du verre</p>
+            <div className="flex flex-wrap gap-3">{verres.map((v) => <Button key={v.id} size="icon" variant="outline" aria-label={`Verre ${v.nom}`} title={v.nom} aria-pressed={verre === v.id} onClick={() => setVerre(v.id)} className={`${verreSwatches[v.id]} ${verre === v.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}><span className="sr-only">{v.nom}</span></Button>)}</div>
             <p className="mb-3 mt-6 text-sm text-muted-foreground">Couleur du bouchon</p>
             <div className="flex flex-wrap gap-3">{bouchons.map((b) => <Button key={b.id} size="icon" variant="outline" aria-label={`Bouchon ${b.nom}`} title={b.nom} aria-pressed={bouchon === b.id} onClick={() => setBouchon(b.id)} className={`cap-swatch cap-${b.id} ${bouchon === b.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}><span className="sr-only">{b.nom}</span></Button>)}</div>
           </div>
@@ -82,6 +86,7 @@ function Atelier() {
         <aside className="lg:sticky lg:top-24">
           <div className="bottle-preview relative isolate aspect-square overflow-hidden" data-forme={forme} aria-label="Aperçu de votre flacon">
             <img src={photos[forme]} alt={`Votre flacon ${forme}`} width={768} height={768} className="h-full w-full object-cover" />
+            {verre !== "transparent" && <div className={`bottle-glass glass-${verre}`} aria-hidden="true" />}
             <div className="bottle-liquid" aria-hidden="true">{etapes.map((e) => <div key={e.key} className={`liquid-${couleurNote(choix[e.key])}`} />)}</div>
             <div className={`bottle-cap cap-${bouchon}`} aria-hidden="true" />
             <div data-forme={forme} data-etiquette={formeEtiquette} className={`bottle-label ${fonds[couleur]} ${textes[encre]} label-${police}`}><span className="bottle-name">{nom || "Mon Essence"}</span>{texte && <span className="bottle-dedication">{texte}</span>}</div>
@@ -89,7 +94,7 @@ function Atelier() {
           <p className="mt-2 text-xs text-muted-foreground">Teinte illustrative selon les notes choisies.</p>
           <p className="eyebrow mt-6">Votre création</p>
           <h3 className="mt-2 break-words text-3xl">{nom || "Mon Essence"}</h3>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">{etapes.map((e) => <li key={e.key}>{e.titre} : <span className="text-foreground">{choix[e.key] ?? "—"}</span></li>)}<li>Flacon : <span className="text-foreground">{taille.ml} ml · {formes.find((f) => f.id === forme)?.nom}</span></li><li>Bouchon : <span className="text-foreground">{bouchons.find((b) => b.id === bouchon)?.nom}</span></li><li>Étiquette : <span className="text-foreground">{couleurs.find((c) => c.id === couleur)?.nom} · {formesEtiquette.find((f) => f.id === formeEtiquette)?.nom}</span></li>{texte && <li>Dédicace : <span className="text-foreground">{texte}</span></li>}</ul>
+          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">{etapes.map((e) => <li key={e.key}>{e.titre} : <span className="text-foreground">{choix[e.key] ?? "—"}</span></li>)}<li>Flacon : <span className="text-foreground">{taille.ml} ml · {formes.find((f) => f.id === forme)?.nom} · verre {verres.find((v) => v.id === verre)?.nom}</span></li><li>Bouchon : <span className="text-foreground">{bouchons.find((b) => b.id === bouchon)?.nom}</span></li><li>Étiquette : <span className="text-foreground">{couleurs.find((c) => c.id === couleur)?.nom} · {formesEtiquette.find((f) => f.id === formeEtiquette)?.nom}</span></li>{texte && <li>Dédicace : <span className="text-foreground">{texte}</span></li>}</ul>
           <p className="mt-5 text-2xl text-primary">{formatPrix(taille.prix)}</p>
           {complet ? <Button asChild className="mt-5 h-auto w-full whitespace-normal py-3"><a href={`https://wa.me/?text=${msg}`} target="_blank" rel="noreferrer"><Send /> Commander via WhatsApp</a></Button> : <p className="mt-5 text-xs text-muted-foreground">Choisissez vos trois notes pour commander.</p>}
         </aside>

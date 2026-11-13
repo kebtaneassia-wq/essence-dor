@@ -134,6 +134,19 @@ html.light {
   --label-emeraude: oklch(0.5 0.07 160);
   --label-sable: oklch(0.85 0.05 85);
   --label-terracotta: oklch(0.62 0.1 45);
+  --label-creme: oklch(0.95 0.025 95);
+  --label-menthe: oklch(0.88 0.06 165);
+  --label-prune: oklch(0.38 0.07 320);
+  --label-marine: oklch(0.35 0.06 255);
+  --label-corail: oklch(0.72 0.12 35);
+  --label-taupe: oklch(0.6 0.025 70);
+  --glass-dore: oklch(0.78 0.12 90);
+  --glass-rose: oklch(0.78 0.09 10);
+  --glass-fume: oklch(0.55 0.01 240);
+  --glass-bleu: oklch(0.7 0.08 235);
+  --glass-vert: oklch(0.72 0.07 155);
+  --glass-violet: oklch(0.7 0.08 300);
+  --glass-ambre: oklch(0.7 0.12 60);
   --cap-gold: oklch(0.73 0.105 85);
   --cap-silver: oklch(0.8 0.006 240);
   --cap-black: oklch(0.26 0.006 75);
@@ -145,6 +158,11 @@ html.light {
   --cap-nacre: oklch(0.92 0.02 100);
   --cap-bordeaux: oklch(0.4 0.09 15);
   --cap-emeraude: oklch(0.48 0.07 160);
+  --cap-platine: oklch(0.88 0.008 240);
+  --cap-violet: oklch(0.45 0.09 300);
+  --cap-bleu: oklch(0.4 0.08 250);
+  --cap-rouge: oklch(0.5 0.14 25);
+  --cap-turquoise: oklch(0.72 0.09 195);
   --cap-highlight: oklch(0.98 0.005 90 / 72%);
   --cap-shadow: oklch(0.12 0.005 75 / 65%);
   --liquid-neutral: oklch(0.92 0.015 90);
@@ -170,6 +188,12 @@ html.light {
   --color-label-emeraude: var(--label-emeraude);
   --color-label-sable: var(--label-sable);
   --color-label-terracotta: var(--label-terracotta);
+  --color-label-creme: var(--label-creme);
+  --color-label-menthe: var(--label-menthe);
+  --color-label-prune: var(--label-prune);
+  --color-label-marine: var(--label-marine);
+  --color-label-corail: var(--label-corail);
+  --color-label-taupe: var(--label-taupe);
   --color-ink-charcoal: var(--ink-charcoal);
   --color-ink-gold: var(--ink-gold);
   --color-ink-light: var(--ink-light);
@@ -199,6 +223,17 @@ html.light {
 .liquid-vert { background: var(--liquid-green); }
 .liquid-poudre { background: var(--liquid-powder); }
 .liquid-ambre { background: var(--liquid-amber); }
+.bottle-glass { position: absolute; inset: 28% 29% 19%; mix-blend-mode: color; opacity: 0.65; border-radius: 8% 8% 15% 15%; pointer-events: none; }
+.bottle-preview[data-forme="rond"] .bottle-glass { inset: 30% 20% 18%; border-radius: 30% 30% 48% 48%; }
+.bottle-preview[data-forme="ovale"] .bottle-glass { inset: 22% 30% 17%; border-radius: 45%; }
+.bottle-preview[data-forme="facettes"] .bottle-glass { inset: 28% 25% 18%; clip-path: polygon(15% 0, 85% 0, 100% 16%, 100% 90%, 85% 100%, 15% 100%, 0 90%, 0 16%); }
+.glass-dore { background: var(--glass-dore); }
+.glass-rose { background: var(--glass-rose); }
+.glass-fume { background: var(--glass-fume); }
+.glass-bleu { background: var(--glass-bleu); }
+.glass-vert { background: var(--glass-vert); }
+.glass-violet { background: var(--glass-violet); }
+.glass-ambre { background: var(--glass-ambre); }
 .cap-or { --cap-color: var(--cap-gold); }
 .cap-argent { --cap-color: var(--cap-silver); }
 .cap-noir { --cap-color: var(--cap-black); }
@@ -210,8 +245,13 @@ html.light {
 .cap-nacre { --cap-color: var(--cap-nacre); }
 .cap-bordeaux { --cap-color: var(--cap-bordeaux); }
 .cap-emeraude { --cap-color: var(--cap-emeraude); }
+.cap-platine { --cap-color: var(--cap-platine); }
+.cap-violet { --cap-color: var(--cap-violet); }
+.cap-bleu { --cap-color: var(--cap-bleu); }
+.cap-rouge { --cap-color: var(--cap-rouge); }
+.cap-turquoise { --cap-color: var(--cap-turquoise); }
 .cap-swatch { background: var(--cap-color); }
-.bottle-cap { position: absolute; left: 43%; top: 11.2%; width: 14%; height: 13.5%; border-radius: 8% 8% 3% 3%; background: linear-gradient(90deg, var(--cap-shadow), var(--cap-color) 12%, var(--cap-highlight) 30%, var(--cap-color) 48%, var(--cap-shadow) 69%, var(--cap-color) 92%); pointer-events: none; }
+.bottle-cap { position: absolute; left: 43%; top: 11.2%; width: 14%; height: 13.5%; border-radius: 8% 8% 3% 3%; background: linear-gradient(90deg, color-mix(in oklch, var(--cap-color), black 30%), var(--cap-color) 14%, color-mix(in oklch, var(--cap-color), white 55%) 32%, var(--cap-color) 50%, color-mix(in oklch, var(--cap-color), black 22%) 70%, var(--cap-color) 92%); pointer-events: none; }
 .bottle-preview[data-forme="rond"] .bottle-cap { top: 13.4%; height: 13.4%; }
 .bottle-preview[data-forme="ovale"] .bottle-cap { top: 6.8%; height: 13.1%; }
 .bottle-preview[data-forme="facettes"] .bottle-cap { top: 10.6%; height: 14%; }

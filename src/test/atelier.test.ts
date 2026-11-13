@@ -19,6 +19,10 @@ describe("Atelier et tarifs", () => {
     const message = messageCommande({ notes: {}, ml: 50, prix: 6900, nom: "Assia", forme: "Rond", etiquette: "Bordeaux", etiquetteForme: "Blason", encre: "Or", police: "Classique", texte: "" });
     expect(message).toContain("Étiquette : Bordeaux, forme Blason");
   });
+  it("includes the glass color in the order", () => {
+    const message = messageCommande({ notes: {}, ml: 50, prix: 6900, nom: "Assia", forme: "Ovale", verre: "Fumé", etiquette: "Marine", encre: "Clair", police: "Moderne", texte: "" });
+    expect(message).toContain("50 ml — Ovale, verre Fumé");
+  });
   it("includes all bottle and label choices in the order", () => {
     const message = messageCommande({ notes: { tete: "Pamplemousse", coeur: "Tubéreuse", fond: "Oud" }, ml: 100, prix: 11500, nom: "Assia", forme: "Rond", etiquette: "Rose", encre: "Or", police: "Manuscrite", texte: "Pour Assia" });
     for (const value of ["Pamplemousse", "Tubéreuse", "Oud", "100 ml — Rond", "Étiquette : Rose", "Or, style Manuscrite", "Pour Assia", "11500 DA"]) expect(message).toContain(value);
