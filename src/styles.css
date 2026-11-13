@@ -130,11 +130,21 @@ html.light {
   --label-dark: oklch(0.23 0.008 75);
   --label-lavender: oklch(0.84 0.055 300);
   --label-blue: oklch(0.83 0.045 235);
+  --label-bordeaux: oklch(0.42 0.09 15);
+  --label-emeraude: oklch(0.5 0.07 160);
+  --label-sable: oklch(0.85 0.05 85);
+  --label-terracotta: oklch(0.62 0.1 45);
   --cap-gold: oklch(0.73 0.105 85);
   --cap-silver: oklch(0.8 0.006 240);
   --cap-black: oklch(0.26 0.006 75);
   --cap-rose: oklch(0.74 0.085 15);
   --cap-sage: oklch(0.66 0.06 150);
+  --cap-champagne: oklch(0.85 0.06 90);
+  --cap-bronze: oklch(0.55 0.08 65);
+  --cap-cuivre: oklch(0.62 0.11 50);
+  --cap-nacre: oklch(0.92 0.02 100);
+  --cap-bordeaux: oklch(0.4 0.09 15);
+  --cap-emeraude: oklch(0.48 0.07 160);
   --cap-highlight: oklch(0.98 0.005 90 / 72%);
   --cap-shadow: oklch(0.12 0.005 75 / 65%);
   --liquid-neutral: oklch(0.92 0.015 90);
@@ -156,6 +166,10 @@ html.light {
   --color-label-dark: var(--label-dark);
   --color-label-lavender: var(--label-lavender);
   --color-label-blue: var(--label-blue);
+  --color-label-bordeaux: var(--label-bordeaux);
+  --color-label-emeraude: var(--label-emeraude);
+  --color-label-sable: var(--label-sable);
+  --color-label-terracotta: var(--label-terracotta);
   --color-ink-charcoal: var(--ink-charcoal);
   --color-ink-gold: var(--ink-gold);
   --color-ink-light: var(--ink-light);
@@ -164,6 +178,9 @@ html.light {
 .bottle-label[data-forme="rond"] { left: 37%; top: 48%; width: 26%; height: 15%; }
 .bottle-label[data-forme="ovale"] { left: 39%; top: 44%; width: 22%; height: 13%; }
 .bottle-label[data-forme="facettes"] { left: 38%; top: 45%; width: 24%; height: 14%; }
+.bottle-label[data-etiquette="ovale"] { border-radius: 50%; }
+.bottle-label[data-etiquette="rond"] { border-radius: 50%; aspect-ratio: 1; height: auto; }
+.bottle-label[data-etiquette="blason"] { border-radius: 12% 12% 50% 50% / 8% 8% 42% 42%; }
 .label-classique { font-family: var(--font-display); font-weight: 600; }
 .label-moderne { font-family: var(--font-sans); }
 .label-manuscrite { font-family: "Segoe Script", "Brush Script MT", cursive; font-style: italic; }
@@ -187,6 +204,12 @@ html.light {
 .cap-noir { --cap-color: var(--cap-black); }
 .cap-rose { --cap-color: var(--cap-rose); }
 .cap-sauge { --cap-color: var(--cap-sage); }
+.cap-champagne { --cap-color: var(--cap-champagne); }
+.cap-bronze { --cap-color: var(--cap-bronze); }
+.cap-cuivre { --cap-color: var(--cap-cuivre); }
+.cap-nacre { --cap-color: var(--cap-nacre); }
+.cap-bordeaux { --cap-color: var(--cap-bordeaux); }
+.cap-emeraude { --cap-color: var(--cap-emeraude); }
 .cap-swatch { background: var(--cap-color); }
 .bottle-cap { position: absolute; left: 43%; top: 11.2%; width: 14%; height: 13.5%; border-radius: 8% 8% 3% 3%; background: linear-gradient(90deg, var(--cap-shadow), var(--cap-color) 12%, var(--cap-highlight) 30%, var(--cap-color) 48%, var(--cap-shadow) 69%, var(--cap-color) 92%); pointer-events: none; }
 .bottle-preview[data-forme="rond"] .bottle-cap { top: 13.4%; height: 13.4%; }

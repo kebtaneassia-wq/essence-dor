@@ -9,6 +9,16 @@ describe("Atelier et tarifs", () => {
     expect(etapes[1].opts).toContain("Tubéreuse");
     expect(etapes[2].opts).toContain("Bois de cachemire");
   });
+  it("sorts each note group alphabetically without duplicates", () => {
+    for (const e of etapes) {
+      expect([...e.opts].sort((a, b) => a.localeCompare(b, "fr"))).toEqual([...e.opts]);
+      expect(new Set(e.opts).size).toBe(e.opts.length);
+    }
+  });
+  it("includes the label shape in the order", () => {
+    const message = messageCommande({ notes: {}, ml: 50, prix: 6900, nom: "Assia", forme: "Rond", etiquette: "Bordeaux", etiquetteForme: "Blason", encre: "Or", police: "Classique", texte: "" });
+    expect(message).toContain("Étiquette : Bordeaux, forme Blason");
+  });
   it("includes all bottle and label choices in the order", () => {
     const message = messageCommande({ notes: { tete: "Pamplemousse", coeur: "Tubéreuse", fond: "Oud" }, ml: 100, prix: 11500, nom: "Assia", forme: "Rond", etiquette: "Rose", encre: "Or", police: "Manuscrite", texte: "Pour Assia" });
     for (const value of ["Pamplemousse", "Tubéreuse", "Oud", "100 ml — Rond", "Étiquette : Rose", "Or, style Manuscrite", "Pour Assia", "11500 DA"]) expect(message).toContain(value);
