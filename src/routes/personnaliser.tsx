@@ -82,8 +82,15 @@ function Atelier() {
             <div><p className="mb-3 text-sm text-muted-foreground">Couleur de l'écriture</p><div className="flex flex-wrap gap-3">{encres.map((c) => <Button key={c.id} size="icon" variant="outline" aria-label={`Écriture ${c.nom}`} title={c.nom} aria-pressed={encre === c.id} onClick={() => { setEncre(c.id); if (c.id === "clair") setCouleur("noir"); if (c.id === "charbon" && fondsSombres.has(couleur)) setCouleur("ivoire"); }} className={`${swatches[c.id]} ${encre === c.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}><span className="sr-only">{c.nom}</span></Button>)}</div></div>
             <div><p className="mb-3 text-sm text-muted-foreground">Style d'écriture</p><div className="flex flex-wrap gap-3">{polices.map((p) => <Button key={p.id} variant={police === p.id ? "default" : "outline"} aria-pressed={police === p.id} onClick={() => setPolice(p.id)} className={`label-${p.id}`}>{p.nom}</Button>)}</div></div>
           </div>
+        <div className="border-t border-border pt-6">
+          <p className="eyebrow mt-6">Votre création</p>
+          <h3 className="mt-2 break-words text-3xl">{nom || "Mon Essence"}</h3>
+          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">{etapes.map((e) => <li key={e.key}>{e.titre} : <span className="text-foreground">{choix[e.key] ?? "—"}</span></li>)}<li>Flacon : <span className="text-foreground">{taille.ml} ml · {formes.find((f) => f.id === forme)?.nom} · verre {verres.find((v) => v.id === verre)?.nom}</span></li><li>Bouchon : <span className="text-foreground">{bouchons.find((b) => b.id === bouchon)?.nom}</span></li><li>Étiquette : <span className="text-foreground">{couleurs.find((c) => c.id === couleur)?.nom} · {formesEtiquette.find((f) => f.id === formeEtiquette)?.nom}</span></li>{texte && <li>Dédicace : <span className="text-foreground">{texte}</span></li>}</ul>
+          <p className="mt-5 text-2xl text-primary">{formatPrix(taille.prix)}</p>
+          {complet ? <Button asChild className="mt-5 h-auto w-full whitespace-normal py-3"><a href={`https://wa.me/?text=${msg}`} target="_blank" rel="noreferrer"><Send /> Commander via WhatsApp</a></Button> : <p className="mt-5 text-xs text-muted-foreground">Choisissez vos trois notes pour commander.</p>}
+          </div>
         </div>
-        <aside className="lg:sticky lg:top-24">
+        <aside className="lg:sticky lg:top-24 lg:w-full lg:max-w-[calc(100vh-9rem)] lg:self-start lg:justify-self-center">
           <div className="bottle-preview relative isolate aspect-square overflow-hidden" data-forme={forme} aria-label="Aperçu de votre flacon">
             <img src={photos[forme]} alt={`Votre flacon ${forme}`} width={768} height={768} className="h-full w-full object-cover" />
             {verre !== "transparent" && <div className={`bottle-glass glass-${verre}`} aria-hidden="true" />}
@@ -92,11 +99,6 @@ function Atelier() {
             <div data-forme={forme} data-etiquette={formeEtiquette} className={`bottle-label ${fonds[couleur]} ${textes[encre]} label-${police}`}><span className="bottle-name">{nom || "Mon Essence"}</span>{texte && <span className="bottle-dedication">{texte}</span>}</div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">Teinte illustrative selon les notes choisies.</p>
-          <p className="eyebrow mt-6">Votre création</p>
-          <h3 className="mt-2 break-words text-3xl">{nom || "Mon Essence"}</h3>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">{etapes.map((e) => <li key={e.key}>{e.titre} : <span className="text-foreground">{choix[e.key] ?? "—"}</span></li>)}<li>Flacon : <span className="text-foreground">{taille.ml} ml · {formes.find((f) => f.id === forme)?.nom} · verre {verres.find((v) => v.id === verre)?.nom}</span></li><li>Bouchon : <span className="text-foreground">{bouchons.find((b) => b.id === bouchon)?.nom}</span></li><li>Étiquette : <span className="text-foreground">{couleurs.find((c) => c.id === couleur)?.nom} · {formesEtiquette.find((f) => f.id === formeEtiquette)?.nom}</span></li>{texte && <li>Dédicace : <span className="text-foreground">{texte}</span></li>}</ul>
-          <p className="mt-5 text-2xl text-primary">{formatPrix(taille.prix)}</p>
-          {complet ? <Button asChild className="mt-5 h-auto w-full whitespace-normal py-3"><a href={`https://wa.me/?text=${msg}`} target="_blank" rel="noreferrer"><Send /> Commander via WhatsApp</a></Button> : <p className="mt-5 text-xs text-muted-foreground">Choisissez vos trois notes pour commander.</p>}
         </aside>
       </div>
     </section>
