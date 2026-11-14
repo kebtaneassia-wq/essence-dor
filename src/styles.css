@@ -226,10 +226,10 @@ html.light {
 .liquid-vert { background: var(--liquid-green); }
 .liquid-poudre { background: var(--liquid-powder); }
 .liquid-ambre { background: var(--liquid-amber); }
-.bottle-glass { position: absolute; inset: 28% 29% 19%; mix-blend-mode: color; opacity: 0.8; z-index: 2; filter: blur(3px); -webkit-mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); border-radius: 8% 8% 15% 15%; pointer-events: none; }
-.bottle-preview[data-forme="rond"] .bottle-glass { inset: 30% 20% 18%; border-radius: 30% 30% 48% 48%; }
-.bottle-preview[data-forme="ovale"] .bottle-glass { inset: 22% 30% 17%; border-radius: 45%; }
-.bottle-preview[data-forme="facettes"] .bottle-glass { inset: 28% 25% 18%; clip-path: polygon(15% 0, 85% 0, 100% 16%, 100% 90%, 85% 100%, 15% 100%, 0 90%, 0 16%); }
+.bottle-glass { position: absolute; inset: 28% 29% 19%; mix-blend-mode: color; opacity: 0.8; z-index: 2; filter: blur(1.5px); -webkit-mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); border-radius: 8% 8% 15% 15%; pointer-events: none; }
+.bottle-preview[data-forme="rond"] .bottle-glass { inset: 31% 23% 16%; border-radius: 50%; }
+.bottle-preview[data-forme="ovale"] .bottle-glass { inset: 22% 30% 14%; border-radius: 45%; }
+.bottle-preview[data-forme="facettes"] .bottle-glass { inset: 28% 26% 15%; clip-path: polygon(15% 0, 85% 0, 100% 16%, 100% 90%, 85% 100%, 15% 100%, 0 90%, 0 16%); }
 .glass-dore { background: var(--glass-dore); }
 .glass-rose { background: var(--glass-rose); }
 .glass-fume { background: var(--glass-fume); }
