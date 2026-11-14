@@ -205,6 +205,9 @@ html.light {
 .bottle-label[data-etiquette="ovale"] { border-radius: 50%; }
 .bottle-label[data-etiquette="rond"] { border-radius: 50%; aspect-ratio: 1; height: auto; }
 .bottle-label[data-etiquette="blason"] { border-radius: 12% 12% 50% 50% / 8% 8% 42% 42%; }
+.bottle-label { z-index: 5; isolation: isolate; opacity: 1; mix-blend-mode: normal; box-shadow: 0 0 0 1px color-mix(in oklch, currentColor 25%, transparent) inset, 0 0 0 5px var(--label-backdrop, transparent), 0 2px 6px oklch(0 0 0 / 0.25); }
+.bottle-label[data-etiquette="ovale"], .bottle-label[data-etiquette="rond"], .bottle-label[data-etiquette="blason"] { transform: scale(1.18); }
+.bottle-label::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: inherit; }
 .label-classique { font-family: var(--font-display); font-weight: 600; }
 .label-moderne { font-family: var(--font-sans); }
 .label-manuscrite { font-family: "Segoe Script", "Brush Script MT", cursive; font-style: italic; }
@@ -223,7 +226,7 @@ html.light {
 .liquid-vert { background: var(--liquid-green); }
 .liquid-poudre { background: var(--liquid-powder); }
 .liquid-ambre { background: var(--liquid-amber); }
-.bottle-glass { position: absolute; inset: 28% 29% 19%; mix-blend-mode: color; opacity: 0.65; border-radius: 8% 8% 15% 15%; pointer-events: none; }
+.bottle-glass { position: absolute; inset: 28% 29% 19%; mix-blend-mode: color; opacity: 0.8; z-index: 2; filter: blur(3px); -webkit-mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse at center, #000 62%, transparent 100%); border-radius: 8% 8% 15% 15%; pointer-events: none; }
 .bottle-preview[data-forme="rond"] .bottle-glass { inset: 30% 20% 18%; border-radius: 30% 30% 48% 48%; }
 .bottle-preview[data-forme="ovale"] .bottle-glass { inset: 22% 30% 17%; border-radius: 45%; }
 .bottle-preview[data-forme="facettes"] .bottle-glass { inset: 28% 25% 18%; clip-path: polygon(15% 0, 85% 0, 100% 16%, 100% 90%, 85% 100%, 15% 100%, 0 90%, 0 16%); }
