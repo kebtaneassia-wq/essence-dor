@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, type UIMessage } from "ai";
-import { createResponsesCall } from "@/server/ai/responses";
+import { createChatCall } from "@/server/ai/chat";
 import { parfums, familles, formatPrix } from "@/lib/parfums";
 import { instructionsAtelier } from "@/lib/conseiller";
 
 const catalogue = parfums
-  .map((p) => `- ${p.nom} (${familles[p.famille]}, ${p.genre}) : ${p.notes}. ${p.description} Prix : ${formatPrix(p.prix)}`)
+  .map(
+    (p) =>
+      `- ${p.nom} (${familles[p.famille]}, ${p.genre}) : ${p.notes}. ${p.description} Prix : ${formatPrix(p.prix)}`,
+  )
   .join("\n");
 
 const instructions = `Tu es "Ambre", la conseillère parfum de la boutique Essence d'Or. Réponds toujours en français (ou dans la langue du client), avec élégance, chaleur et concision.
@@ -20,17 +23,30 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apiKey = process.env['LOVABLE_API_KEY'];
-        if (!apiKey) return new Response("Configuration manquante", { status: 500 });
+        const apiKey = process.env["AI_API_KEY"]?.trim();
+        if (!apiKey) {
+          return new Response(
+            "Configuration IA manquante : définissez AI_API_KEY dans .env.local.",
+            {
+              status: 500,
+            },
+          );
+        }
         const body = (await request.json()) as { messages?: UIMessage[]; mode?: string };
         if (!Array.isArray(body.messages)) return new Response("Requête invalide", { status: 400 });
-        const call = createResponsesCall(
+        return createChatCall(
           request,
-          { baseURL: "https://ai.gateway.lovable.dev/v1", apiKey, model: "openai/gpt-6-astra" },
+          {
+            baseURL: process.env["AI_BASE_URL"]?.trim() || "https://api.openai.com/v1",
+            apiKey,
+            model: process.env["AI_MODEL"]?.trim() || "gpt-4o-mini",
+          },
           await convertToModelMessages(body.messages),
-          instructions + (body.mode === "creation" ? "\nLe client vient de l'atelier et a choisi de créer son parfum. Demande ses envies pour proposer les trois notes adaptées, sans demander à nouveau s'il veut chercher dans la collection." : ""),
+          instructions +
+            (body.mode === "creation"
+              ? "\nLe client vient de l'atelier et a choisi de créer son parfum. Demande ses envies pour proposer les trois notes adaptées, sans demander à nouveau s'il veut chercher dans la collection."
+              : ""),
         );
-        return call.response();
       },
     },
   },
